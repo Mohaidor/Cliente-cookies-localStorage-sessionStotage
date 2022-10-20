@@ -1,0 +1,21 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: darkgray;
+}
+h1 {
+    text-align: center;
+}
+label{
+    display: inline-block;
+    width: 150px;
+}
+span {
+    color: red;
+}
+
+#ejer05 > p {
+    display: inline;
+}

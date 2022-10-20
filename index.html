@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" href="./Styles/style.css" />
+    <title>Cookies</title>
+  </head>
+  <body>
+    <section>
+      <h1>Ej_T2_A5: localStorage, sesionStorage, cookies, JSON</h1>
+      <article id="ejer01">
+        <h4>
+          01 - Explica con tus propias palabras las diferencias y similitudes
+          entre Cookies y Almacenamiento local (localStorage – sessionStorage).
+        </h4>
+        <p>
+          <b>*Cookie:&nbsp;</b>
+          Las cookies son unos archivos creados por un sitio web que se
+          almacenan en el navegador del usuario con ciertos datos de este para
+          que se le pueda ofrecer un contenido más apropiado a lo que busca y
+          sus hábitos de navegación.
+        </p>
+        <p>
+          <b>*localStorage/sessionStorage:&nbsp;</b>localStorage y
+          sessionStorage tienen la función de almacenar datos de manera local,
+          la diferencia entre éstas dos es que localStorage almacena la
+          información de forma indefinida o hasta que se decida limpiar los
+          datos del navegador y sessionStorage almacena información mientras la
+          pestaña donde se esté utilizando siga abierta, una vez cerrada, la
+          información se elimina.
+        </p>
+      </article>
+      <hr />
+      <article id="ejer02">
+        <h4>
+          02 – Busca información y explica con tus propias palabras como debe de
+          tratar una web las cookies según la RGPD.
+        </h4>
+        <p>
+          El Reglamento General de Protección de Datos o <b>RGPD</b> es un
+          reglamento a nivel europeo que exige que un sitio web permita a los
+          usuarios de Europa controlar la activación de las cookies y los
+          rastreadores que recopilan sus datos personales.<br />Los sitios web
+          deben cumplir con los siguientes requisitos del RGPD para el uso de
+          cookies:
+        </p>
+        <ul>
+          <li>
+            Debe obtenerse un consentimiento previo y explícito antes de que se
+            active ninguna cookie (a excepción de las cookies necesarias de
+            lista blanca).
+          </li>
+          <li>
+            Los consentimientos deben ser granulares, es decir, los usuarios
+            deben poder activar algunas cookies y no otras, sin estar obligados
+            a consentir todas o ninguna.
+          </li>
+          <li>
+            El consentimiento debe poder darse libremente, es decir, no puede
+            ser forzado.
+          </li>
+          <li>
+            El consentimiento debe ser tan fácil de retirar como de conceder.
+          </li>
+          <li>
+            Los consentimientos deben almacenarse de forma segura como
+            documentación legal.
+          </li>
+          <li>
+            El consentimiento debe renovarse al menos una vez al año. Sin
+            embargo, algunas guías nacionales de protección de datos recomiendan
+            una renovación más frecuente, por ejemplo, cada 6 meses. Comprueba
+            que cumples con tus guías locales de protección de datos.
+          </li>
+        </ul>
+      </article>
+      <hr />
+      <article id="ejer03">
+        <h3>Ejercicio 3:</h3>
+        <input type="button" value="Añadir" id="btnAnyadir" />
+        <input type="button" value="Consultar" id="btnConsultar" />
+        <input type="button" value="Modificar" id="btnModificar" />
+        <input type="button" value="Borrar" id="btnBorrar" />
+        <ul id="listaCookies"></ul>
+        <span></span>
+      </article>
+      <hr />
+      <article id="ejer04">
+        <h3>Ejercicio 4:</h3>
+        <input type="button" value="Insertar cookie" id="insertarCookie" />
+        <br />
+        <code id="existeOno"></code>
+      </article>
+      <hr />
+      <article id="ejer05">
+        <h3>Ejercicio 5:</h3>
+        <form action="" id="form">
+          <label for="nombre">Nombre:&nbsp;</label>
+          <input type="text" name="nombre" id="nombre" />
+          <span id="errorNombre"></span>
+          <br />
+          <label for="direccion">Dirección:&nbsp;</label>
+          <input type="text" name="direccion" id="direccion" />
+          <span id="errorDireccion"></span>
+          <br />
+          <label for="nif">NIF:&nbsp;</label>
+          <input type="text" name="nif" id="nif" />
+          <span id="errorNif"></span>
+          <br />
+          <label for="fecha">Fecha Nacimiento:&nbsp;</label>
+          <input type="date" name="fecha" id="fecha" />
+          <span id="errorFecha"></span>
+          <br />
+          <label for="cPostal">Código Postal:&nbsp;</label>
+          <input type="text" name="cPostal" id="cPostal" />
+          <span id="errorCpostal"></span>
+          <br />
+          <label for="pais">País:&nbsp;</label>
+          <select name="pais" id="pais">
+            <option value="-1">Escoge una opción</option>
+            <option value="España">España</option>
+            <option value="Francia">Francia</option>
+            <option value="Italia">Italia</option>
+            <option value="Alemania">Alemania</option>
+            <option value="Belgica">Bélgica</option>
+            <option value="Suiza">Suiza</option>
+          </select>
+          <span id="errorPais"></span>
+          <br />
+          <label for="genero">Genero:&nbsp;</label>
+          <input type="radio" name="genero" value="hombre" />Hombre
+          <input type="radio" name="genero" value="mujer" />Mujer
+          <input type="radio" name="genero" value="no determinado" />Prefiero no
+          decirlo
+          <span id="errorGenero"></span>
+          <br />
+          <label for="preferencias">Color/es preferido/s:&nbsp;</label>
+          <input type="checkbox" name="colores" value="rojo" />Rojo
+          <input type="checkbox" name="colores" value="verde" />Verde
+          <input type="checkbox" name="colores" value="azul" />Azul
+          <span id="errorColores"></span>
+          <br />
+          <label for="Telefono">Teléfono:&nbsp;</label>
+          <input type="tel" name="telefono" id="telefono" />
+          <span id="errorTelefono"></span>
+          <br />
+          <label for="email">E-mail:&nbsp;</label>
+          <input type="text" name="email" id="email" />
+          <span id="errorEmail"></span>
+          <br />
+          <label for="password">Password:&nbsp;</label>
+          <input type="password" name="password" id="password" />
+          <span id="errorPassword"></span>
+          <br />
+          <label for="verification-pass">Repite el password:&nbsp;</label>
+          <input type="password" name="password2" id="password2" />
+          <span id="errorPassword2"></span>
+          <br />
+          <p>
+            <cite style="color: red">*</cite> Todos los campos son obligatorios.
+          </p>
+          <input type="submit" value="Guardar" />&nbsp;
+          <input type="button" value="Recuperar" id="recupera" />&nbsp;
+          <input type="reset" value="Cancelar" id="borrar" />
+          <input
+            type="button"
+            value="Borrar almacenamiento"
+            id="borrarAlmacenamiento"
+          />&nbsp;
+        </form>
+        <br />
+        <h4>
+          Cierra la página una vez guardados los datos, vuélvela a abrir y
+          prueba de cargar los datos. Indica el comportamiento de la página.
+        </h4>
+        <p>
+          Tras cerrar y volver abrir la web los datos guardados en localStorage
+          siguen existiendo
+        </p>
+        <hr />
+      </article>
+      <article id="ejer06">
+        <h4>
+          06 – Basándote en la página anterior, guarda alguno de los datos (o
+          todos) en sessionStorage. Cierra la página una vez guardados los
+          datos, vuélvela a abrir y prueba de cargar los datos. Indica el
+          comportamiento de la página.
+        </h4>
+        <p>
+          Tras cerrar y volver abrir la web los datos guardados en sessionStorage
+          ya no existen
+        </p>
+      </article>
+      <hr>
+      <article id="ejer07">
+        <p>Cargando los datos de ciclos</p>
+        <input type="button" value="Pulse para Cargar" id="cargar">
+        <br>
+        <br>
+      </article>
+    </section>
+    <script src="./Scripts/script03.js"></script>
+    <script src="./Scripts/script04.js"></script>
+    <script src="./Scripts/script05.js"></script>
+    <script src="./Scripts/script06.js"></script>
+    <script src="./Scripts/script07.js"></script>
+  </body>
+</html>
