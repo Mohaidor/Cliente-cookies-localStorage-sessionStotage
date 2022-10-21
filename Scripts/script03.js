@@ -1,7 +1,7 @@
 'use strict'
 
 //nodos donde se muestra la lista de cookies y el error si lo hubiere 
-let span = document.querySelector('span');
+//let span = document.querySelector('span');
 let lista = document.querySelector('#listaCookies')
 
 
@@ -10,7 +10,7 @@ let anyadir = document.querySelector('#btnAnyadir');
 anyadir.addEventListener('click', anyadirCoockie, false)
 function anyadirCoockie() {
     //primero borro la lista y el error si existiese
-    borralistaSpan()
+    borralista()
 
     //Obtener el numero de cookies 
     let cookie = prompt("¿Cuantas cookies quieres crear?");
@@ -98,7 +98,7 @@ let caducidad = (index) => {
 let consultar = document.querySelector('#btnConsultar');
 consultar.addEventListener('click', consultarCoockie, false)
 function consultarCoockie() {
-    borralistaSpan()
+    borralista()
 
     let cookies = document.cookie
     if (cookies) {
@@ -115,8 +115,7 @@ function consultarCoockie() {
         });
     } else {
         //Si no hay cookies->Error
-        span.style.color = "red";
-        span.innerHTML = "- Error no hay cookies"
+        alert('No hay cookies')
     }
 }
 //Botón modificar
@@ -190,6 +189,7 @@ function borrarCoockie() {
             //La hago caducar con max-age:0
             document.cookie = `${cookieBorrar}=;max-age=0;SameSite=Lax;path=/`
             alert("Se ha borrado la cookie correctamente")
+            borralista();
         } else {
             //Si no existe la cookie a borrar
             alert("No existe la cookie: " + cookieBorrar + "\n\nTip: pulsa sobre el botón consultar para ver las cookies existentes")
@@ -203,7 +203,6 @@ function borrarCoockie() {
 
 
 //Método extra que borra el span de error y la lista de cookies
-function borralistaSpan() {
-    span.innerHTML = "";
+function borralista() {
     lista.innerHTML = "";
 }
