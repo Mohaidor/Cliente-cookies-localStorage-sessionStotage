@@ -22,8 +22,6 @@ cargar.addEventListener('click', cargaCursos, false)
 
 
 function cargaCursos() {
-    //Añadir el Json al localStorage
-    localStorage.setItem('cursos', jsonCreado);
 
     //Aumento contador a 1
     contador++
@@ -33,6 +31,8 @@ function cargaCursos() {
         return
     }
 
+    //Añadir el Json al localStorage
+    localStorage.setItem('cursos', jsonCreado);
     //creo objeto del json creado
     let objectCurso = JSON.parse(localStorage['cursos']);
 
@@ -52,8 +52,8 @@ function cargaCursos() {
     ejercicio.appendChild(titulo);
     ejercicio.appendChild(lista);
     //para que entre en conflicto con los elementos del form
-    localStorage.removeItem['cursos'];
+    localStorage.removeItem('cursos');
     //muevo la vista hacia la lista para que se vea(si no habría que hacer scroll)
     document.querySelector('#ejer07>ul').scrollIntoView();
-    
+
 }
