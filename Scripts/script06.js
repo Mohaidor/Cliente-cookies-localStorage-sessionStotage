@@ -1,6 +1,8 @@
 'use strict'
 
-
+/*Lo mismo que localStorage pero en sessionStorage
+Se guardará en sessionStorage una vez se pulse guardar, se decline guardar en localStorage y se acepte guardar en sessionStorage
+*/
 function guardaSessionStorage(nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, paisOk, generoOK, [...coloresOk], telefonoOk, emailOk, passwordOk, password2Ok) {
 
     if (sessionStorage) {

@@ -1,60 +1,74 @@
 "use strict";
 
+/*
 
+HE PUESTO LO AÑADIDO DEL EJERCICIO 5 DE LA PRÁCTICA T2_A5 PARA UNA MEJOR VISUALIZACIÓN
+
+*/
+
+/*----------------------------------------------------------------------------------------------------------------------------*/
+//Botón borrar almacenamiento
 const borrarAlmacenamiento = document.querySelector("#borrarAlmacenamiento");
-const recupera = document.querySelector("#recupera");
-
 borrarAlmacenamiento.addEventListener('click', borraLocalStorage, false);
+
+//Botón recuperar información
+const recupera = document.querySelector("#recupera");
 recupera.addEventListener('click', recuperaInformacion, false)
 
-// Guardar se hace despues de validar en la linea 192. Se llama al método guardaLocalStorage()
+
+//El botón cancelar(Linea 107-124) y el botón guardar(104 112)
+
+// Guardar se hace después de validar en la linea 192. Se llama al método guardaLocalStorage(valores validados)
 
 function guardaLocalStorage(nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, paisOk, generoOK, [...coloresOk], telefonoOk, emailOk, passwordOk, password2Ok) {
 
+  //Si se puede usar localStorage...
   if (localStorage) {
-
+    //Si hay algo lo borro
     localStorage.clear();
-
+    //Array de claves y valores
     let keys = ["nombre", "direccion", "nif", "fNacimiento", "cPostal", "pais", "genero", "colores", "telefono", "email", "password", "password2"]
     let values = [nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, paisOk, generoOK, [...coloresOk], telefonoOk, emailOk, passwordOk, password2Ok]
-
+    //recorro las claves y voy rellenando el localStorage
     for (let i = 0; i < keys.length; i++) {
       localStorage.setItem(keys[i], values[i]);
     }
-
+    //Si se guarda bien aviso que todo bien
     if (localStorage.length) {
       alert("Este navegador puede trabajar con localStorage\nSe han creado correctamente los datos en localStorage")
     }
 
   } else {
+    //Si no se pudiera usar localStorage
     alert("Este navegador no puede trabajar con localStorage")
   }
 }
 
 
 function borraLocalStorage() {
-
+  //Si hay algo en localStorage 
   if (localStorage.length) {
-
+    //Pido confirmación
     let resultado = confirm("Estas seguro de eliminar el localStorage")
-
+    //Si es true
     if (resultado) {
+      //Borro y aviso
       localStorage.clear();
       alert("Se ha borrado correctamente el localStorage")
     } else {
       return
     }
   } else {
-    alert("El localStorage ya está vacio")
+    alert("El localStorage ya está vació")
   }
 }
 
 
-
 function recuperaInformacion() {
 
+  //Si hay algo en localStorage
   if (localStorage.length) {
-
+    //Establezco los valores mediante lo guardado en localStorage accediendo mediante la clave
     document.querySelector("#nombre").value = localStorage['nombre'];
     document.querySelector(`input[name="genero"][value=${localStorage['genero']}]`).click();
     document.querySelector("#direccion").value = localStorage['direccion'];
@@ -71,7 +85,7 @@ function recuperaInformacion() {
         document.querySelector(`input[name="colores"][value=${color}]`).click()
       }
       /*Este if evita que una vez recuperada
-        la informacion se pulse el boton de nuevo y
+        la información se pulse el botón de nuevo y
         quite los checks correctos*/
 
     });
@@ -80,31 +94,16 @@ function recuperaInformacion() {
     document.querySelector("#password").value = localStorage['password'];
     document.querySelector("#password2").value = localStorage['password2'];
   } else {
-    alert("No hay informacion que recuperar")
+    alert("No hay información que recuperar")
   }
 }
 
-
-
-
-//El boton 'Cancelar está controlado por el método 
-
-
-
-
-
-
-
-
-
-
-
-
+/*-----------------------------------------------------------------------------------------------*/
 
 //Obtener el nodo del form, los span de error, los inputs, botón borrar
 const form = document.querySelector("#form");
 const spans = document.querySelectorAll("span");
-const formInputs = document.querySelectorAll("#ejer1 input, select");
+const formInputs = document.querySelectorAll("input ,select");
 const borrarForm = document.querySelector("#borrar");
 
 //////////////////////////////////////////////////////////////////////EventListeners///////////////////////////////////////////////////////////////////////////////////////////
@@ -207,12 +206,15 @@ function validarForm() {
 
 
 
-    let respuesta = confirm("Quieres guardar los datos en localStorage(Aceptar) o sessionStorage(Cancelar)");
+    let respuesta = confirm("Quieres guardar los datos en localStorage");
 
     if (respuesta) {
       guardaLocalStorage(nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, paisOk, generoOK, [...coloresOk], telefonoOk, emailOk, passwordOk, password2Ok);
     }else {
-      guardaSessionStorage(nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, paisOk, generoOK, [...coloresOk], telefonoOk, emailOk, passwordOk, password2Ok)
+      let respuesta = confirm("Quieres guardar los datos en sessionStorage");
+      if (respuesta) {
+        guardaSessionStorage(nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, paisOk, generoOK, [...coloresOk], telefonoOk, emailOk, passwordOk, password2Ok)
+      }
     }
 
 
@@ -361,7 +363,7 @@ let isPaisOk = (pais) => {
 };
 let isOkGenero = (genero) => {
   const errorGenero = document.querySelector("#errorGenero");
-  //Obtengo el valor checkado del genero)
+  //Obtengo el valor checked del genero)
   let generoChecked = [...genero].filter(input => input.checked)[0];
   if (typeof generoChecked == "undefined") {
     errorGenero.innerHTML = "*Selecciona un genero";
@@ -373,7 +375,7 @@ let isOkGenero = (genero) => {
 };
 let isColoresOK = (colores) => {
   const errorColores = document.querySelector("#errorColores");
-  //Obtener valores de los colores checkados
+  //Obtener valores de los colores checked
   let coloresChecked = [...colores].filter(input => input.checked)
   if (coloresChecked.length == 0) {
     errorColores.innerHTML = "*Selecciona al menos un color";
