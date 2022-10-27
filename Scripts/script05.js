@@ -26,13 +26,26 @@ function guardaLocalStorage(nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, pai
   if (localStorage) {
     //Si hay algo lo borro
     localStorage.clear();
-    //Array de claves y valores
-    let keys = ["nombre", "direccion", "nif", "fNacimiento", "cPostal", "pais", "genero", "colores", "telefono", "email", "password", "password2"]
-    let values = [nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, paisOk, generoOK, [...coloresOk], telefonoOk, emailOk, passwordOk, password2Ok]
-    //recorro las claves y voy rellenando el localStorage
-    for (let i = 0; i < keys.length; i++) {
-      localStorage.setItem(keys[i], values[i]);
+
+    let object = {
+      nombre: nombreOk,
+      direccion: direccionOk,
+      nif: nifOk,
+      fNacimiento: fNazOk,
+      cPostal: cPostalOk,
+      pais: paisOk,
+      genero: generoOK,
+      colores: [...coloresOk],
+      telefono: telefonoOk,
+      email: emailOk,
+      password: passwordOk,
+      password2: password2Ok
     }
+
+    let json = JSON.stringify(object)
+    localStorage.setItem('datos', json)
+
+
     //Si se guarda bien aviso que todo bien
     if (localStorage.length) {
       alert("Este navegador puede trabajar con localStorage\nSe han creado correctamente los datos en localStorage")
@@ -68,16 +81,18 @@ function recuperaInformacion() {
 
   //Si hay algo en localStorage
   if (localStorage.length) {
-    //Establezco los valores mediante lo guardado en localStorage accediendo mediante la clave
-    document.querySelector("#nombre").value = localStorage['nombre'];
-    document.querySelector(`input[name="genero"][value=${localStorage['genero']}]`).click();
-    document.querySelector("#direccion").value = localStorage['direccion'];
-    document.querySelector("#nif").value = localStorage['nif'];
-    let fechaFormat = localStorage['fNacimiento'].split(/\//);
+
+    let datos = JSON.parse(localStorage.getItem('datos'));
+
+    document.querySelector("#nombre").value = datos.nombre;
+    document.querySelector(`input[value='${datos.genero}']`).click();
+    document.querySelector("#direccion").value = datos.direccion;
+    document.querySelector("#nif").value = datos.nif;
+    let fechaFormat = datos.fNacimiento.split(/\//);
     document.querySelector("#fecha").valueAsDate = new Date(`${fechaFormat[2]}/${fechaFormat[1]}/${+fechaFormat[0] + 1}`);
-    document.querySelector("#cPostal").value = localStorage['cPostal'];
-    document.querySelector("#pais").value = localStorage['pais'];
-    let coloresArray = localStorage['colores'].split(",")
+    document.querySelector("#cPostal").value = datos.cPostal;
+    document.querySelector("#pais").value = datos.pais;
+    let coloresArray = datos.colores
     coloresArray.forEach(color => {
       //if not checked
       if (!document.querySelector(`input[name="colores"][value=${color}]`).checked) {
@@ -89,10 +104,20 @@ function recuperaInformacion() {
         quite los checks correctos*/
 
     });
-    document.querySelector("#telefono").value = localStorage['telefono'];
-    document.querySelector("#email").value = localStorage['email'];
-    document.querySelector("#password").value = localStorage['password'];
-    document.querySelector("#password2").value = localStorage['password2'];
+    document.querySelector("#telefono").value = datos.telefono;
+    document.querySelector("#email").value = datos.email;
+    document.querySelector("#password").value = datos.password;
+    document.querySelector("#password2").value = datos.password2;
+
+
+
+
+
+
+    ///////////////////////////////MODIFICACIÓN FALLO DE NO USAR OBJETO JUNTO CON JSON.parse/////////////////////////////////////////////////////////////////////////////
+
+
+
   } else {
     alert("No hay información que recuperar")
   }
@@ -210,7 +235,7 @@ function validarForm() {
 
     if (respuesta) {
       guardaLocalStorage(nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, paisOk, generoOK, [...coloresOk], telefonoOk, emailOk, passwordOk, password2Ok);
-    }else {
+    } else {
       let respuesta = confirm("Quieres guardar los datos en sessionStorage");
       if (respuesta) {
         guardaSessionStorage(nombreOk, direccionOk, nifOk, fNazOk, cPostalOk, paisOk, generoOK, [...coloresOk], telefonoOk, emailOk, passwordOk, password2Ok)
