@@ -327,7 +327,7 @@ let isFnazOk = (fNaz) => {
   let fechaAhoraCadena =
     fechaAhora.getDate() +
     "/" +
-    fechaAhora.getMonth() +
+    (fechaAhora.getMonth() + 1)+
     "/" +
     fechaAhora.getFullYear();
 
